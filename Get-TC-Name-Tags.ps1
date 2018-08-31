@@ -1,3 +1,5 @@
+# Copyright 2018, Ju-Hyoung Lee
+
 $files = Get-ChildItem *.xml
 
 $azure_only = 0
