@@ -19,30 +19,14 @@ __lis_version=$(modinfo hv_vmbus | grep ^version: | cut -d ":" -f2| sed -e 's/  
 # increase match_point if a requirement meets in the condition.
 match_point=0
 
-# Disto check - optional
-# case $__DISTRO in
-#     *CentOS*release*7\.*\.*)
-#         ((match_point++))
-#         ;;
-#     *Red*7\.*)
-#         ((match_point++))
-#         ;;
-#     *)
-#         echo "not eligible"
-#         ;;
-# esac
-#echo "DISTRO : $match_point"
-
 # lis version check
 _lis_ver_mj=$(echo $__lis_version | cut -d "." -f1)
 _lis_ver_mn=$(echo $__lis_version | cut -d "." -f2)
 _lis_ver_rv=$(echo $__lis_version | cut -d "." -f3)
 
-if [[ $_lis_ver_mj -eq 4 ]]; then
-    if [[ $_lis_ver_mn -eq 2 ]]; then
-        if [[ $_lis_ver_rv -ge 1 ]] && [[ $_lis_ver_rv -le 4 ]]; then
-            ((match_point++))
-        fi
+if [[ $_lis_ver_mj -eq 4 ]] && [[ $_lis_ver_mn -eq 2 ]]; then
+    if [[ $_lis_ver_rv -ge 1 ]] && [[ $_lis_ver_rv -le 4 ]]; then
+        ((match_point++))
     fi
 fi
 
