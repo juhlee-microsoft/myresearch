@@ -9,12 +9,6 @@ __kernel_version=$(uname -r)
 # LIS version: 4.2.1 through 4.2.4
 __lis_version=$(modinfo hv_vmbus | grep ^version: | cut -d ":" -f2| sed -e 's/  */ /g' -e 's/^ *\(.*\) *$/\1/')
 
-# #######################
-# fake data
-# __kernel_version=3.10.0-125.192
-# __lis_version=4.2.3
-# #######################
-
 # Main
 # increase match_point if a requirement meets in the condition.
 match_point=0
@@ -30,8 +24,6 @@ if [[ $_lis_ver_mj -eq 4 ]] && [[ $_lis_ver_mn -eq 2 ]]; then
     fi
 fi
 
-#echo "LIS : $match_point"
-
 # kernel version check
 kv1=$(echo $__kernel_version  | cut -d "-" -f1)
 kv2=$(echo $__kernel_version  | cut -d "-" -f2 | cut -d '.' -f 1)
@@ -45,8 +37,6 @@ fi
 if [[ $kv1 == "2.6.32" ]]; then
     ((match_point++))
 fi
-
-#echo "KERNEL : $match_point"
 
 if [[ $match_point -eq 2 ]];then
     echo "Your VM falls into the issue criteria. Recommend to follow Microsoft instruction."
